@@ -1,0 +1,34 @@
+{% load static %}
+
+<html>
+
+<!-- Styling -->
+	<style>
+		body {
+			background-color:#262626;
+			color:#e6f5ff;
+		}
+		header {
+			padding-bottom:2%;
+		}
+		form {
+			display:block;
+			text-align:left;
+		}
+	</style>
+
+<!-- Universal Header -->	
+	<header>
+		{% include 'universal_header.html' %}
+	</header>
+
+<!-- Registration form -->
+	<body>
+		<div>Register for an account:</div>
+		<form method='POST' action=''>
+			{% csrf_token %}
+			{{form.as_p}}
+			<input type="submit" class='btn btn-default' value='Submit' />
+		</form>
+	</body>
+</html>

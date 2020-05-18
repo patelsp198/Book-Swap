@@ -1,0 +1,62 @@
+{% load static %}
+
+<html>
+
+<!-- Styling -->
+	<style>
+		body {
+			background-color:#262626;
+			color:#e6f5ff;
+		}
+		p {
+			color:#e6f5ff;
+			font-size:20px;
+		}
+		header {
+			padding-bottom:2%;
+		}
+		.intro {
+			font-size:40px;
+			color:#e6f5ff;
+			padding-left:2%;
+			padding-top:2%;
+			padding-bottom:1%;
+		}
+		.messages {
+			color:#ff0000;
+		}
+		p{
+			padding:2%;
+		}
+		dd{
+			padding-bottom:1%;
+		}
+	</style>
+
+<!-- Universal Header -->	
+	<header>
+		{% include 'universal_header.html' %}
+	</header>
+
+<!-- General website information -->
+	<body>
+		<div class = 'intro'>	
+			Welcome to Book Swap!
+		</div>
+		<div class = 'messages'>
+			{% for message in messages %}
+				{{message}}
+			{% endfor %}
+		</div>
+		<div>
+			<p>Here you can list and search for books posted by other students. You must register for an account in order to add books. </p>
+			<p>Please be respectful. If there are any issues please contact an admin at admin@bookswap.com. </p>
+
+			<p><B>RECENT UPDATES:</B>
+				<dd>- Fixed header so the rainbow banner doesn't follow you down when scrolling through books.</dd>
+				<dd>- Removed user management page from view of general users.</dd>
+				<dd>- Ability to delete an account if requested, please contact admin at admin@bookswap.com.</dd>
+			</p>
+		</div>
+	</body>
+</html>

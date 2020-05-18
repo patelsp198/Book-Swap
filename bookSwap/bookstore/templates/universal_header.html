@@ -1,0 +1,66 @@
+{% load static %}
+<html>
+
+<!-- Styling -->
+	<style>
+		.title {
+			font-size:60px;
+			height:15%;
+			text-align:center;
+			padding-bottom:1%;
+			padding-top:3%;
+			color: #00ccff;
+
+		}
+		ul, li {		
+			display:inline;
+		}
+		.uni_header {			
+			background-color:#0d0d0d;
+			height:3%;
+			width:95%;
+			line-height: 62.5px;
+			margin-left:2%;
+			padding-bottom:2%;
+			border:3px solid transparent;
+			border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+			border-image-slice: 1;
+		}
+		a {
+			text-decoration:none;
+			color:#00ccff;
+		}
+		li {
+			padding-right:1%;
+			font-size:25px;
+		}
+		 .logout, .myBooks, .login, .register, .add, .display{
+			float:right;
+			padding-right:2%;
+		}
+	</style>
+
+<!-- Title -->	
+	<header class = 'title'><b>BOOK SWAP</b></header>
+	
+<!--Buttons -->
+	<body>
+		<div class = 'uni_header'>
+			<ul>
+				<li><a href= {% url 'index' %}> Home </a></li>
+				<li><a href = {% url 'list' %}> Books </a></li>
+				{% if request.user.is_authenticated %}
+				    <li class = 'logout'><a href = {% url 'logout' %}> Logout </a></li>
+				    <li class = 'myBooks'><a href = {% url 'my_books' %}>My Books</a></li>
+				    <li class ='add'><a href = {% url 'add' %}> Add a Book </a></li>
+				    {%if request.user.username == 'patelsp198' %}
+						<li class ='display'><a href = {% url 'display' %}> Display Users</a></li>
+				    {%endif%}		
+				{% else %}
+		            <li class = 'register'><a href = {% url 'register' %}> Register </a></li>
+				    <li class = 'login'><a href = {% url 'login' %}> Login </a></li>
+		        {% endif %}
+			</ul>
+		</div>
+	</body>
+</html>

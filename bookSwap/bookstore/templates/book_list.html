@@ -1,0 +1,79 @@
+{% load static %}
+{%load render_table from django_tables2 %}
+{% load bootstrap3 %}
+
+<html>
+
+<!-- Styling -->
+	<style>
+		form {
+			text-align:center;			
+		}
+		body {
+			background-color:#262626;
+			color:#e6f5ff;
+		}
+		header {
+			padding-bottom:2%;
+		}
+		table, th, td {
+			border: 1px solid;
+			border-color:#007a99;
+			border-collapse:collapse;
+			text-align:center;
+			font-size:20px;
+		}
+		table {
+			width: 85%;
+			margin-left: 7.5%;
+		}
+		th {
+			font-size:25;
+			font-weight:bold;
+		}
+	</style>
+
+<!-- Universal Header -->
+	<header>
+		{% include 'universal_header.html' %}
+	</header>
+
+<!-- Filter Books -->	
+	{% if filter %}
+		<form action='' method='get'>	
+			{% bootstrap_form filter.form layout='horizontal' %}
+			{% bootstrap_button 'Search' %}
+			<a href = "{% url 'list' %}"><button type='button' class='btn btn-default'><span class='glyphicon glyphicon-remove'>Reset</span></button></a>
+		</form>
+	{% endif %}
+
+<!-- List of books to search through. Must be logged in to view contact information -->
+	<body>
+		<table>
+			<tr>
+				<th>Title</th>
+				<th>Author</th>
+				<th>ISBN</th>
+				<th>Course</th>
+				{% if request.user.is_authenticated %}
+					<th>Contact</th>
+				{% endif %}
+			</tr>
+
+		{% for book in filter.qs %}
+			<tr>
+				<td> {{ book.title }} </td>
+				<td> {{book.author }} </td>
+				<td> {{ book.isbn }} </td>
+				<td> {{book.course }} </td>
+				{% if request.user.is_authenticated %}
+					{% for student in students %}
+						{% if book.owner == student.username %}
+							<td>{{student.email}}</td>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+			</tr>
+		{% endfor %}
+	</body>
+</html>

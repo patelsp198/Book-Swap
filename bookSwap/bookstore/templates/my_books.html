@@ -1,0 +1,68 @@
+{% load static %}
+{%load render_table from django_tables2 %}
+{% load bootstrap3 %}
+
+<html>
+
+<!-- Styling -->
+	<style>
+		.intro {
+			font-size:40px;
+			color:#e6f5ff;
+			padding-left:2%;
+			padding-top:2%;
+			padding-bottom:1%;
+			text-align:center;
+		}
+		body {
+			background-color:#262626;
+			color:#e6f5ff;
+		}
+		header {
+			padding-bottom:2%;
+		}
+		table, th, td {
+			border: 1px solid;
+			border-color:#007a99;
+			border-collapse:collapse;
+			text-align:center;
+			font-size:20px;
+		}
+		table {
+			width: 85%;
+			margin-left: 7.5%;
+		}
+		th {
+			font-size:25;
+			font-weight:bold;
+		}
+	</style>
+
+<!-- Universal Header -->	
+	<header>
+		{% include 'universal_header.html' %}
+	</header>
+
+<!-- Logged in user's book list. Delete listed books. -->	
+	<body>		
+		<div class = "intro">My Books</div>
+		<table>
+			<tr>
+				<th>Title</th>
+				<th>Author</th>
+				<th>ISBN</th>
+				<th>Course</th>
+				<th>Delete</th>
+			</tr>
+
+		{% for book in books %}
+			<tr>
+				<td> {{ book.title }} </td>
+				<td> {{book.author }} </td>
+				<td> {{ book.isbn }} </td>
+				<td> {{book.course }} </td>
+				<td> <a href = "{% url 'delete_book' pk=book.pk %}"><button type='button' class='btn btn-default'><span class='glyphicon glyphicon-remove'>Delete</span></button></a></td>
+			</tr>
+		{% endfor %}
+	</body>
+</html>

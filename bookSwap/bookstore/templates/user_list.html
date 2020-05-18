@@ -1,0 +1,54 @@
+{% load static %}
+{%load render_table from django_tables2 %}
+{% load bootstrap3 %}
+
+<html>
+
+<!-- Styling -->
+	<style>
+		body {
+			background-color:#262626;
+			color:#e6f5ff;
+		}
+		header {
+			padding-bottom:2%;
+		}
+		table, th, td {
+			border: 1px solid;
+			border-color:#007a99;
+			border-collapse:collapse;
+			text-align:center;
+		}
+		table {
+			width: 85%;
+			margin-left: 7.5%;
+		}
+		th {
+			font-size:25;
+			font-weight:bold;
+		}
+	</style>
+
+<!-- Universal Header -->		
+	<header>
+		{% include 'universal_header.html' %}
+	</header>
+
+<!-- List student accounts with the option to delete an account and their listed books -->	
+	<body>
+		<table>
+			<tr>
+				<th>Username</th>
+				<th>E-mail Address</th>
+				<th>Delete</th>
+			</tr>
+
+		{% for student in students %}
+			<tr>
+				<td> {{ student.username }} </td>
+				<td> {{ student.email }} </td>
+				<td> <a href = "{% url 'delete_user' pk=student.pk %}"><button type='button' class='btn btn-default'><span class='glyphicon glyphicon-remove'>Delete</span></button></a></td>
+			</tr>
+		{% endfor %}
+	</body>
+</html>

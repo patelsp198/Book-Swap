@@ -1,0 +1,44 @@
+{% load static %}
+
+<html>
+
+<!-- Styling -->
+	<style>
+		.intro {
+			font-size:30px;
+			color:#e6f5ff;
+			padding-left:2%;
+			padding-top:2%;
+			padding-bottom:1%;
+		}
+		body {
+			background-color:#262626;
+			color:#e6f5ff;
+		}
+		header {
+			padding-bottom:2%;
+		}
+		form {
+			display:inline-block;
+			text-align:center;
+			font-size:20px;
+		}
+	</style>
+
+<!-- Universal Header -->	
+	<header>
+		{%include 'universal_header.html' %}
+	</header>
+
+
+	<body>
+		<div class = 'intro'>Please enter your textbook information here:</div>
+		<div>
+			<form action='' method='POST' novalidate>
+				{% csrf_token %}
+				{{form.as_p}}
+				<input type='submit' value='Submit'>
+			</form>
+		</div>
+	</body>
+</html>
